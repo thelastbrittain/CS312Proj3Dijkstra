@@ -3,9 +3,11 @@ class Array_Priority_Queue():
         self.storage: dict[int, float] = {} # key = vertex, value = cost
         self.queue: set[int] = set() # this is the queue of verticies
         for i in range(len(values)):
-            self.storage[i] = values[i]
-            self.queue.add(i)
+            self.insert(i, values)
     
+    def insert(self, index, values):
+        self.storage[index] = values[index]
+        self.queue.add(index)
         
     def decrease_key(self, vertex: int, new_value: float):
         self.storage[vertex] = new_value

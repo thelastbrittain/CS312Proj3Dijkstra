@@ -1,4 +1,4 @@
-from byu_pytest_utils import max_score, with_import
+from byu_pytest_utils import max_score, with_import # type: ignore
 
 from main import generate_graph
 

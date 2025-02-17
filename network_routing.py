@@ -1,4 +1,5 @@
 from array_priority_queue import Array_Priority_Queue
+from heap_priority_queue import Heap_Priority_Queue
 
 def find_shortest_path_with_heap(
         graph: dict[int, dict[int, float]],
@@ -13,7 +14,13 @@ def find_shortest_path_with_heap(
         - the list of nodes (including `source` and `target`)
         - the cost of the path
     """
-    raise NotImplementedError
+    num_verticies = len(graph.keys())
+    prev: list[int | None] = [None] * num_verticies
+    dist: list[float] = [float('inf')] * num_verticies # index = vertex, value = distance from start
+    dist[source] = 0
+    # make the queue
+    pq = Heap_Priority_Queue(dist)
+    return find_shortest_path(graph, source, target, pq, prev, dist)
 
 def find_shortest_path_with_array(
         graph: dict[int, dict[int, float]],
@@ -34,6 +41,16 @@ def find_shortest_path_with_array(
     dist[source] = 0
     # make the queue
     pq = Array_Priority_Queue(dist)
+    return find_shortest_path(graph, source, target, pq, prev, dist)
+
+def find_shortest_path(
+        graph: dict[int, dict[int, float]],
+        source: int,
+        target: int, 
+        pq: Array_Priority_Queue | Heap_Priority_Queue,
+        prev: list[int | None],
+         dist: list[float]
+) -> tuple[list[int], float]:
     while pq.is_not_empty(): # shoudl be while queue not empty
         current_vertex = pq.delete_min() # should be delete min from queue
         for edge in graph[current_vertex]:
@@ -56,11 +73,3 @@ def find_path(target: int, prev: list[int | None]) -> list[int]:
         current_index = prev[current_index] # type: ignore
     path.reverse()
     return path
-
-def find_shortest_path(
-        graph: dict[int, dict[int, float]],
-        source: int,
-        target: int
-) -> tuple[list[int], float]:
-    
-    raise NotImplementedError

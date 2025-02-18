@@ -19,13 +19,6 @@ class Heap_Priority_Queue():
         self.queue[indexInQueue] = (vertex, new_value) # type: ignore
         self.percolate_up(indexInQueue, vertex) # type: ignore
     
-
-    """
-    Time Complexity:
-
-    Space Complexity: 
-    
-    """
     def delete_min(self):
         # get values and pop 
         smallest = self.queue[0] # constant

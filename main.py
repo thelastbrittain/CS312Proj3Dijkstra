@@ -49,17 +49,17 @@ def main(seed: int, size: int, density: float, noise: float, source: int, target
     end = time()
 
     num_edges = sum(len(edges) for edges in weights.values())
-    print(f'Time to generate network of {size} nodes and {num_edges} edges: {round(end - start, 4)}')
+    print(f'Time to generate network of {size} nodes and {num_edges} edges: {round(end - start, 4)} with density of {density}')
 
     print(f'Direct cost from {source} to {target}: {weights[source].get(target, math.inf)}')
 
-    plot_points(positions)
-    if num_edges < 50:
-        # If the number of non-inf edges is < 50
-        plot_weights(positions, weights)
+    # plot_points(positions)
+    # if num_edges < 50:
+    #     # If the number of non-inf edges is < 50
+    #     plot_weights(positions, weights)
 
-    circle_point(positions[source], c='r')
-    circle_point(positions[target], c='b')
+    # circle_point(positions[source], c='r')
+    # circle_point(positions[target], c='b')
 
     start = time()
     path, cost = find_shortest_path_with_heap(weights, source, target)
@@ -71,7 +71,7 @@ def main(seed: int, size: int, density: float, noise: float, source: int, target
     print('Cost:', cost)
     print('Time:', heap_time)
 
-    draw_path(positions, path)
+    # draw_path(positions, path)
 
     start = time()
     path, cost = find_shortest_path_with_array(weights, source, target)
@@ -84,14 +84,14 @@ def main(seed: int, size: int, density: float, noise: float, source: int, target
     print('Time:', array_time)
 
     title(f'Cost: {cost}, Heap: {round(heap_time, 4)}, Array: {round(array_time, 4)}')
-    show_plot()
+    # show_plot()
 
 
 if __name__ == '__main__':
     # To debug or run in your IDE
     # you can uncomment the lines below and modify the arguments as needed
-    import sys
-    sys.argv = ['main.py', '-n', '10', '--seed', '312', '--density', '0.8', '--noise', '0.05']
+    # import sys
+    # sys.argv = ['main.py', '-n', '10', '--seed', '312', '--density', '0.8', '--noise', '0.05']
 
     parser = argparse.ArgumentParser()
     parser.add_argument('-n', type=int, help='The number of points to generate', default=10)
@@ -116,8 +116,13 @@ if __name__ == '__main__':
     if args.target is None:
         args.target = args.n - 1
 
-    main(args.seed, args.n, args.density, args.noise, args.source, args.target)
+    # main(args.seed, args.n, args.density, args.noise, args.source, args.target)
 
     # You can use a loop like the following to generate data for your tables:
-    # for n in [100, 200, 400, 800, 1600, 3200, 6400]:
-    #     main(312, n, 1, 0.05, 2, 9)
+    # setting = {1000: .01,  5000: .002, 10000: .001, 50000: .0002, 100000: .0001}
+    # for n, d in setting.items():
+    #     main(312, n, d, 0.02, 2, 9)
+    # main(312, 100000, .0001, 0.02, 2, 9)
+
+    for n in [1000, 2000, 3000, 4000, 5000, 6000]:
+        main(312, n, 1, 0.02, 2, 9)

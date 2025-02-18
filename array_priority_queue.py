@@ -1,3 +1,4 @@
+import random
 class Array_Priority_Queue():
     def __init__(self, values: list[float]):
         self.storage: dict[int, float] = {} # key = vertex, value = cost
@@ -17,7 +18,7 @@ class Array_Priority_Queue():
         smallest_distance = float("inf")
         smallest_vertex = 1
         for vertex in self.queue:
-            if self.storage[vertex] < smallest_distance:
+            if self.storage[vertex] <= smallest_distance:
                 smallest_distance = self.storage[vertex]
                 smallest_vertex = vertex
         self.queue.remove(smallest_vertex)

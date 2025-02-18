@@ -11,7 +11,6 @@ class Array_Priority_Queue():
         
     def decrease_key(self, vertex: int, new_value: float):
         self.storage[vertex] = new_value
-        print()
 
     def delete_min(self):
         # find smallest distance (value)

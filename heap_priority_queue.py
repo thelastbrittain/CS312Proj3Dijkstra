@@ -18,28 +18,34 @@ class Heap_Priority_Queue():
         indexInQueue = self.pointerArray[vertex]
         self.queue[indexInQueue] = (vertex, new_value) # type: ignore
         self.percolate_up(indexInQueue, vertex) # type: ignore
-        print()
     
+
+    """
+    Time Complexity:
+
+    Space Complexity: 
+    
+    """
     def delete_min(self):
         # get values and pop 
-        smallest = self.queue[0]
-        self.queue[0] = self.queue[-1]
-        self.queue.pop()
+        smallest = self.queue[0] # constant
+        self.queue[0] = self.queue[-1] # constant
+        self.queue.pop() # constant
 
-        if not self.is_not_empty():
+        if not self.is_not_empty(): # constant
             return smallest[0]
 
          # tell pointer array that vertex is out
-        self.pointerArray[smallest[0]] = None
+        self.pointerArray[smallest[0]] = None # constant
         
         # tell pointer array that prev last is now first
-        self.pointerArray[self.queue[0][0]] = 0
+        self.pointerArray[self.queue[0][0]] = 0 # constant
         
         # percolate down
-        self.percolate_down(0)
+        self.percolate_down(0) # worst case O(logn)
 
         # return og top value
-        return smallest[0]
+        return smallest[0] # constant
 
     def percolate_up(self, currentIndex: int, vertex: int):
         parentIndex = self.calculate_parent_index(currentIndex)
